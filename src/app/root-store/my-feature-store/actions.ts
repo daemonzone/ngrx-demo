@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { MyModel } from '../../main/models/mymodel';
+import {MyModel} from "../../main/models/my-model";
 
 export enum ActionTypes {
   LOAD_REQUEST = '[My Feature] Load Request',

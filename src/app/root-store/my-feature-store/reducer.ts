@@ -13,8 +13,10 @@ export function featureReducer(state = initialState, action: Actions): State {
     case ActionTypes.LOAD_SUCCESS: {
       return featureAdapter.addAll(action.payload.items, {
         ...state,
-        isLoading: false,
-        error: null
+        ...{
+          isLoading: false,
+          error: null
+        }
       });
     }
     case ActionTypes.LOAD_FAILURE: {

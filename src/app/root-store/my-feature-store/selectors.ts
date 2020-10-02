@@ -4,9 +4,9 @@ import {
   MemoizedSelector
 } from '@ngrx/store';
 
-import { MyModel } from '../../main/models/mymodel';
-
 import { featureAdapter, State } from './state';
+
+import {MyModel} from "../../main/models/my-model";
 
 export const getError = (state: State): any => state.error;
 
@@ -22,7 +22,7 @@ export const selectAllMyFeatureItems: (
 ) => MyModel[] = featureAdapter.getSelectors(selectMyFeatureState).selectAll;
 
 export const selectMyFeatureById = (id: string) =>
-  createSelector(this.selectAllMyFeatureItems, (allMyFeatures: MyModel[]) => {
+  createSelector(selectAllMyFeatureItems, (allMyFeatures: MyModel[]) => {
     if (allMyFeatures) {
       return allMyFeatures.find(p => p.id === id);
     } else {

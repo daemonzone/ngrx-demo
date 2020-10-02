@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import {catchError, map, startWith, switchMap, tap} from 'rxjs/operators';
 import { DataService } from '../../main/services/data.service';
 import * as featureActions from './actions';
 
@@ -10,12 +10,15 @@ import * as featureActions from './actions';
 export class MyFeatureStoreEffects {
   constructor(private dataService: DataService, private actions$: Actions) {}
 
-  @Effect()
+  @Effect({})
   loadRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType<featureActions.LoadRequestAction>(
       featureActions.ActionTypes.LOAD_REQUEST
     ),
-    startWith(new featureActions.LoadRequestAction()),
+    tap(item => console.log(item)),
+    map(item => ({ type: "bellazio!" }) )
+    // startWith(new featureActions.LoadRequestAction()),
+    /*
     switchMap(action =>
       this.dataService
         .getItems()
@@ -31,5 +34,6 @@ export class MyFeatureStoreEffects {
           )
         )
     )
+    */
   );
 }
